@@ -1,3 +1,5 @@
+import os
+
 import streamlit as st
 from streamlit_chat import message
 
@@ -7,9 +9,20 @@ from langchain.chains import ConversationChain
 from langchain.schema import HumanMessage
 from langchain.schema import AIMessage
 
-from dotenv import load_dotenv
-# 環境変数の読み込み
-load_dotenv()
+# from dotenv import load_dotenv
+# # 環境変数の読み込み
+# load_dotenv()
+
+
+# streamlitから環境変数の読み込み
+
+st.write("Secret Key", st.secrets["OPENAI_API_KEY"])
+
+# And the root-level secrets are also accessible as environment variables:
+st.write(
+    "Has environment variables been set:",
+    os.environ["OPENAI_API_KEY"] == st.secrets["OPENAI_API_KEY"],
+)
 
 # ChatGPT-3.5のモデルのインスタンスの作成
 chat = ChatOpenAI(model_name="gpt-3.5-turbo")
