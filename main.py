@@ -9,13 +9,13 @@ from langchain.chains import ConversationChain
 from langchain.schema import HumanMessage
 from langchain.schema import AIMessage
 
-# from dotenv import load_dotenv
-# # 環境変数の読み込み
-# load_dotenv()
+from dotenv import load_dotenv
+# 環境変数の読み込み
+load_dotenv()
 
 
-# streamlitから環境変数の読み込み
-openai_api_key = st.secrets["OPENAI_API_KEY"]
+# # streamlitから環境変数の読み込み
+# openai_api_key = st.secrets["OPENAI_API_KEY"]
 
 # ChatGPT-3.5のモデルのインスタンスの作成
 chat = ChatOpenAI(model_name="gpt-3.5-turbo")
@@ -67,4 +67,5 @@ for index, chat_message in enumerate(reversed(history)):
     if type(chat_message) == HumanMessage:
         message(chat_message.content, is_user=True, key=2 * index)
     elif type(chat_message) == AIMessage:
-        message(chat_message.content, is_user=False, key=2 * index + 1)
+        st.markdown(chat_message.content)
+        # message(chat_message.content, is_user=False, key=2 * index + 1)
